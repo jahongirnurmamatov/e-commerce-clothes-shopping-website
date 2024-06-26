@@ -5,6 +5,7 @@ import upload from './multer/multer.js'; // Ensure the correct path and extensio
 import path from 'path';
 import productRouter from './routes/productRoutes.js';
 import connectDb from './config/db.js';
+import userRouter from './routes/userRoutes.js';
 dotenv.config();
 const port = 4000;
 const app = express();
@@ -31,7 +32,8 @@ app.post('/upload', upload.single('product'), (req, res) => {
 
 
 //routes
-app.use('/api/products',productRouter)
+app.use('/api/products',productRouter);
+app.use('/api/users',userRouter);
 
 app.listen(port, (err) => {
     if (!err) {

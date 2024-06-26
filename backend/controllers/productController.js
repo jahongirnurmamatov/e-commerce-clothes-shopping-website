@@ -1,4 +1,6 @@
 import Product from "../model/Product.js";
+import fs from 'fs';
+import path from 'path';
 
 const addProduct = async (req, res) => {
     const product = new Product({
@@ -15,12 +17,21 @@ const addProduct = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
-
 const removeProduct = async (req, res) => {
     const id = req.params.id;
     try {
         const existingProduct = await Product.findById(id);
         if (existingProduct) {
+            // Delete the image file
+            const imagePath = path.join(process.cwd(), 'uploads/images', path.basename(existingProduct.image));
+            fs.unlink(imagePath, async (err) => {
+                if (err) {
+                    console.error('Error deleting the image file:', err);
+                    return res.status(500).json({ success: false, message: 'Failed to delete image file' });
+                }
+
+            });
+            // Delete the product from the database
             await Product.deleteOne({ _id: id });
             res.status(200).json({ success: true, message: "Product removed" });
         } else {
@@ -30,7 +41,6 @@ const removeProduct = async (req, res) => {
         res.status(500).json({ success: false, message: error.message });
     }
 };
-
 const getAllProducts = async (req, res) => {
     try {
         const products = await Product.find({});

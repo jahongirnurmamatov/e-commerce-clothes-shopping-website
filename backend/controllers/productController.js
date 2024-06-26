@@ -8,7 +8,6 @@ const addProduct = async (req, res) => {
         new_price: req.body.new_price,
         old_price: req.body.old_price
     });
-    console.log(product);
     try {
         await product.save();
         res.status(200).json({ success: true, product });

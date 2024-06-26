@@ -44,7 +44,7 @@ const removeProduct = async (req, res) => {
 const getAllProducts = async (req, res) => {
     try {
         const products = await Product.find({});
-        res.status(200).json({ success: true, products });
+        res.status(200).json({ success: true, data:products });
     } catch (error) {
         res.status(404).json({ message: error.message });
     }

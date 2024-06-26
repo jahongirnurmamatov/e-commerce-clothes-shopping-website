@@ -6,7 +6,7 @@ import createToken from '../utils/createToken.js';
 const signup = async (req, res) => {
     const { name, email, password } = req.body;
     if (!name || !email || !password) {
-        throw new Error("Missing fields!")
+        return res.status(400).json({success:false,error:"Missing fields!"})
     }
     try {
         const existing = await User.findOne({email});
@@ -22,12 +22,15 @@ const signup = async (req, res) => {
         await user.save();
         res.status(200).json({success:true,token})
     } catch (error) {
-        res.status(400).json({ success: false, message: error.message })
+        res.status(400).json({ success: false, error: error.message })
     }
 }
 
 const login = async (req,res)=>{
     const {email, password}=req.body;
+    if(!email||!password){
+        return res.status(400).json({error:"Missing fields"})
+    }
     const user = await User.findOne({email});
     if(user){
         const isPasswordValid= await bcryptjs.compare(password,user.password);

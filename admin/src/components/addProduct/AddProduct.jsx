@@ -1,6 +1,7 @@
 import './AddProduct.css'
 import upload_area from '../../assets/upload_area.svg'
 import { useState } from 'react'
+import {  toast } from 'react-toastify';
 const AddProduct = () => {
     const [image,setImage] = useState(false);
     const [productDetails, setProductDetails] = useState({
@@ -40,18 +41,17 @@ const AddProduct = () => {
                 },
                 body: JSON.stringify(product),
             }).then(res => res.json()).then((data) => {
-                console.log(data);
                 if (data.success) {
-                    alert("Product Added");
+                    toast.success('Product added')
                 } else {
-                    alert("Failed to add product");
+                    toast.error('Failed to add product')
                 }
             }).catch((error) => {
                 console.error('Error:', error);
-                alert("Failed to add product");
+                toast.error('Failed to add product')
             });
         } else {
-            alert("Failed to upload image");
+            toast.error('Failed to upload image')
         }
     };
   return (

@@ -49,4 +49,13 @@ const getAllProducts = async (req, res) => {
         res.status(404).json({ message: error.message });
     }
 };
-export { addProduct, removeProduct,getAllProducts };
+const getNewCollections = async(req,res)=>{
+    try {
+        let products = await Product.find({});
+        let newCollection = products.slice(1).slice(-8)
+        res.status(200).json({success:true,newCollection})
+    } catch (error) {
+        res.status(400).json({success:false,error})
+    }
+}
+export { addProduct, removeProduct,getAllProducts,getNewCollections };

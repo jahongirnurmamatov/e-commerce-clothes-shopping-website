@@ -9,7 +9,7 @@ const ListProduct = () => {
     try {
       const response = await fetch('http://localhost:4000/api/products/getAllProducts');
       const data = await response.json();
-      setAllProducts(data.products);
+      setAllProducts(data.data);
     } catch (error) {
       console.error('Error fetching products:', error);
     }

@@ -5,8 +5,7 @@ import { useContext, useEffect } from 'react';
 import { ShopContext } from '../../context/ShopContext';
 const ProductDisplay = (props) => {
     const {product}=props;
-    const {cartItems,addToCart} = useContext(ShopContext);
-    
+    const {addToCart} = useContext(ShopContext);
 
 
   return (
@@ -52,7 +51,7 @@ const ProductDisplay = (props) => {
                     <div>XXL</div>
                 </div>
             </div>
-            <button onClick={()=>{addToCart(product.id)}}>ADD TO CART</button>
+            <button onClick={()=>{addToCart(product)}}>ADD TO CART</button>
             <p className='product-display-right-category'><span>Category :</span>Women, T-Shirt, Crop Top </p>
             <p className='product-display-right-category'><span>Tags :</span>Modern, Latest</p>
         </div>

@@ -68,4 +68,13 @@ const getPopularWomen = async(req,res)=>{
     }
 }
 
-export { addProduct, removeProduct,getAllProducts,getNewCollections,getPopularWomen };
+const addToCart = async(req,res)=>{
+    try {
+        console.log(req.body);
+    } catch (error) {
+        res.status(400).json({success:false,error
+        })
+    }
+}
+
+export { addProduct, removeProduct,getAllProducts,getNewCollections,getPopularWomen,addToCart };

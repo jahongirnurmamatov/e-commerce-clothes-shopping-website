@@ -10,7 +10,6 @@ const Product = () => {
   const {all_product} = useContext(ShopContext);
   const {productId} = useParams();
   const product=all_product?.find((item)=> {return item._id===productId})
-  console.log(product)
 
   return (
     <div>

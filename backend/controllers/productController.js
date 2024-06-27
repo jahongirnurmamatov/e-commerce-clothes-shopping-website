@@ -58,4 +58,14 @@ const getNewCollections = async(req,res)=>{
         res.status(400).json({success:false,error})
     }
 }
-export { addProduct, removeProduct,getAllProducts,getNewCollections };
+const getPopularWomen = async(req,res)=>{
+    try {
+        let products = await Product.find({category:'women'});
+        let popularinwomen=products.slice(0,4);
+        res.status(200).json({success:true,popularinwomen})
+    } catch (error) {
+        res.status(400).json({success:false,error})
+    }
+}
+
+export { addProduct, removeProduct,getAllProducts,getNewCollections,getPopularWomen };
